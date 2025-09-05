@@ -1,0 +1,304 @@
+.chat-window-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  background: #f8f9fa;
+  scroll-behavior: smooth;
+}
+
+.chat-header {
+  background: white;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #f8f9fa;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.room-info h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.room-status {
+  font-size: 12px;
+  color: #28a745;
+  font-weight: 500;
+}
+
+.chat-header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-action {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #f8f9fa;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.header-action:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.message {
+  display: flex;
+  gap: 12px;
+  max-width: 70%;
+}
+
+.message.own {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.message-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-emoji {
+  font-size: 18px;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.message-sender {
+  font-size: 12px;
+  font-weight: 600;
+  color: #666;
+  margin-left: 8px;
+}
+
+.message-bubble {
+  background: white;
+  border-radius: 18px;
+  padding: 12px 16px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.message.own .message-bubble {
+  background: #667eea;
+  color: white;
+}
+
+.message-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.message-time {
+  font-size: 11px;
+  opacity: 0.7;
+  margin-top: 4px;
+  display: block;
+}
+
+.chat-input-container {
+  background: white;
+  border-top: 1px solid #e1e5e9;
+  padding: 16px 20px;
+}
+
+.chat-input-form {
+  width: 100%;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  background: #f8f9fa;
+  border: 2px solid #e1e5e9;
+  border-radius: 25px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.message-input {
+  flex: 1;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.4;
+  resize: none;
+  max-height: 120px;
+  min-height: 20px;
+  font-family: inherit;
+}
+
+.message-input::placeholder {
+  color: #999;
+}
+
+.send-button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: #667eea;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.send-button:hover:not(:disabled) {
+  background: #5a6fd8;
+  transform: scale(1.05);
+}
+
+.send-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Dark mode */
+.app.dark .chat-window-page {
+  background: #1a1a1a;
+}
+
+.app.dark .chat-header {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.app.dark .back-button {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+.app.dark .back-button:hover {
+  background: #4a4a4a;
+  color: white;
+}
+
+.app.dark .room-info h2 {
+  color: white;
+}
+
+.app.dark .header-action {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+.app.dark .header-action:hover {
+  background: #4a4a4a;
+  color: white;
+}
+
+.app.dark .message-bubble {
+  background: #3a3a3a;
+  color: white;
+}
+
+.app.dark .message.own .message-bubble {
+  background: #667eea;
+  color: white;
+}
+
+.app.dark .message-sender {
+  color: #ccc;
+}
+
+.app.dark .chat-input-container {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.app.dark .input-wrapper {
+  background: #3a3a3a;
+  border-color: #444;
+}
+
+.app.dark .input-wrapper:focus-within {
+  border-color: #667eea;
+}
+
+.app.dark .message-input {
+  color: white;
+}
+
+.app.dark .message-input::placeholder {
+  color: #999;
+}

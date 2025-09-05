@@ -1,0 +1,433 @@
+.profile-settings-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #f8f9fa;
+  padding: 20px;
+  scroll-behavior: smooth;
+}
+
+.profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.profile-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.profile-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.profile-content {
+  padding: 30px;
+}
+
+.profile-section {
+  margin-bottom: 40px;
+}
+
+.profile-section h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.avatar-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.avatar-container {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.avatar-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.avatar-circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-upload-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  background: #667eea;
+  color: white;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-upload-btn:hover {
+  background: #5a6fd8;
+  transform: scale(1.1);
+}
+
+.avatar-input {
+  display: none;
+}
+
+.avatar-help {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 15px;
+  color: #999;
+  z-index: 1;
+}
+
+.form-input {
+  width: 100%;
+  padding: 15px 15px 15px 45px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.password-toggle:hover {
+  color: #667eea;
+}
+
+.settings-section {
+  margin-bottom: 40px;
+}
+
+.settings-section h2 {
+  margin: 0 0 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+.settings-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e1e5e9;
+  transition: all 0.3s ease;
+}
+
+.setting-item:hover {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.setting-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+}
+
+.setting-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.setting-details h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.setting-details p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.toggle-switch {
+  width: 50px;
+  height: 28px;
+  background: #ccc;
+  border: none;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.toggle-switch.active {
+  background: #667eea;
+}
+
+.toggle-slider {
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+  transform: translateX(22px);
+}
+
+.actions-section {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.save-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+  justify-content: center;
+}
+
+.save-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.save-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Dark mode */
+.app.dark .profile-settings-page {
+  background: #1a1a1a;
+}
+
+.app.dark .profile-container {
+  background: #2a2a2a;
+  color: white;
+}
+
+.app.dark .profile-header {
+  background: #333;
+  border-color: #444;
+}
+
+.app.dark .back-button {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+.app.dark .back-button:hover {
+  background: #4a4a4a;
+  color: white;
+}
+
+.app.dark .profile-header h1 {
+  color: white;
+}
+
+.app.dark .profile-section h2 {
+  color: white;
+  border-color: #444;
+}
+
+.app.dark .avatar-section {
+  background: #3a3a3a;
+}
+
+.app.dark .avatar-circle {
+  background: #4a4a4a;
+}
+
+.app.dark .avatar-help {
+  color: #ccc;
+}
+
+.app.dark .form-group label {
+  color: white;
+}
+
+.app.dark .form-input {
+  background: #3a3a3a;
+  border-color: #444;
+  color: white;
+}
+
+.app.dark .form-input:focus {
+  background: #4a4a4a;
+  border-color: #667eea;
+}
+
+.app.dark .settings-section h2 {
+  color: white;
+  border-color: #444;
+}
+
+.app.dark .setting-item {
+  background: #3a3a3a;
+  border-color: #444;
+}
+
+.app.dark .setting-item:hover {
+  background: #4a4a4a;
+  border-color: #667eea;
+}
+
+.app.dark .setting-icon {
+  background: #2a2a2a;
+}
+
+.app.dark .setting-details h3 {
+  color: white;
+}
+
+.app.dark .setting-details p {
+  color: #ccc;
+}
+
+.app.dark .actions-section {
+  border-color: #444;
+}

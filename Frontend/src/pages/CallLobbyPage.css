@@ -1,0 +1,462 @@
+.call-lobby-page {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  scroll-behavior: smooth;
+}
+
+.lobby-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  overflow: hidden;
+}
+
+.lobby-header {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: white;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.lobby-header h1 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.action-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #666;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover {
+  background: #e9ecef;
+  color: #333;
+}
+
+.lobby-content {
+  padding: 30px;
+}
+
+.room-section {
+  margin-bottom: 30px;
+}
+
+.room-section h2 {
+  margin: 0 0 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.room-input-container {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.room-input {
+  flex: 1;
+  padding: 15px;
+  border: 2px solid #e1e5e9;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-align: center;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.room-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.create-room-btn {
+  padding: 15px 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.create-room-btn:hover {
+  background: #5a6fd8;
+  transform: translateY(-1px);
+}
+
+.room-help {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.device-controls {
+  margin-bottom: 30px;
+}
+
+.device-controls h3 {
+  margin: 0 0 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.controls-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.control-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px solid #e1e5e9;
+  transition: all 0.3s ease;
+}
+
+.control-item:hover {
+  border-color: #667eea;
+  background: white;
+}
+
+.control-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #667eea;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.control-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.control-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.control-status {
+  font-size: 12px;
+  color: #666;
+}
+
+.control-toggle {
+  width: 50px;
+  height: 28px;
+  background: #ccc;
+  border: none;
+  border-radius: 14px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.control-toggle.active {
+  background: #667eea;
+}
+
+.toggle-slider {
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.control-toggle.active .toggle-slider {
+  transform: translateX(22px);
+}
+
+.participants-section {
+  margin-bottom: 30px;
+}
+
+.participants-section h3 {
+  margin: 0 0 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.participants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.participant-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e1e5e9;
+}
+
+.participant-avatar {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avatar-emoji {
+  font-size: 20px;
+}
+
+.online-indicator {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.online-indicator.online {
+  background: #28a745;
+}
+
+.online-indicator.offline {
+  background: #6c757d;
+}
+
+.participant-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.participant-name {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.participant-status {
+  font-size: 12px;
+  color: #666;
+}
+
+.join-section {
+  text-align: center;
+}
+
+.join-call-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 18px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.join-call-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.join-call-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.join-help {
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+}
+
+/* Dark mode */
+.app.dark .lobby-container {
+  background: #1a1a1a;
+  color: white;
+}
+
+.app.dark .lobby-header {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.app.dark .back-button {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+.app.dark .back-button:hover {
+  background: #4a4a4a;
+  color: white;
+}
+
+.app.dark .lobby-header h1 {
+  color: white;
+}
+
+.app.dark .action-btn {
+  background: #3a3a3a;
+  color: #ccc;
+}
+
+.app.dark .action-btn:hover {
+  background: #4a4a4a;
+  color: white;
+}
+
+.app.dark .room-section h2 {
+  color: white;
+}
+
+.app.dark .room-input {
+  background: #3a3a3a;
+  border-color: #444;
+  color: white;
+}
+
+.app.dark .room-input:focus {
+  background: #4a4a4a;
+  border-color: #667eea;
+}
+
+.app.dark .room-help {
+  color: #ccc;
+}
+
+.app.dark .device-controls h3 {
+  color: white;
+}
+
+.app.dark .control-item {
+  background: #3a3a3a;
+  border-color: #444;
+}
+
+.app.dark .control-item:hover {
+  background: #4a4a4a;
+  border-color: #667eea;
+}
+
+.app.dark .control-icon {
+  background: #2a2a2a;
+}
+
+.app.dark .control-label {
+  color: white;
+}
+
+.app.dark .control-status {
+  color: #ccc;
+}
+
+.app.dark .participants-section h3 {
+  color: white;
+}
+
+.app.dark .participant-item {
+  background: #3a3a3a;
+  border-color: #444;
+}
+
+.app.dark .participant-avatar {
+  background: #2a2a2a;
+}
+
+.app.dark .participant-name {
+  color: white;
+}
+
+.app.dark .participant-status {
+  color: #ccc;
+}
+
+.app.dark .join-help {
+  color: #ccc;
+}
