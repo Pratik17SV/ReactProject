@@ -230,7 +230,7 @@ function HomePage({ user, setUser }) {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2024 ChatApp. All rights reserved.</p>
+            <p>&copy; 2025 ChatApp. All rights reserved.</p>
           </div>
         </div>
       </footer>
