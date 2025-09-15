@@ -28,6 +28,20 @@ export async function Signup(req, res) {
 
         const newUser = new User({name, email, password, avatar:randomAvater});
 
+        try {
+            await upsertStreamUser({
+            id:newUser._id.toString,
+            name:newUser.name,
+            email:newUser.email,
+            avatar:randomAvater||""
+            });
+            console.log('Stream is created for user: '+newUser.name);
+        } catch (error) {
+            console.log('Error in createStreamUser: '+error);
+        }
+
+
+
         //To DO: Create a same user in stream chat
         const token = jwt.sign({userId: newUser._id}, process.env.JWT_SECRET_KEY, {expiresIn: '7d'});
 
@@ -47,10 +61,38 @@ export async function Signup(req, res) {
 }
 
 export async function Login(req, res) {
-    const {email, password} = req.body;
-    res.send('Login route working');
+    try {
+        const {email, password} = req.body;
+        if(!email || !password) {
+            return res.status(400).json({message: 'All fields are required'});
+        }
+        const user = await User.findOne({email});
+        if(!user) {
+            return res.status(401).json({message: 'Invalid email or password'});
+        }
+        const isMatch = await user.matchPassword(password);
+        if(!isMatch) {
+            return res.status(401).json({message: 'Invalid password'});
+        }
+
+        const token = jwt.sign({userId: newUser._id}, process.env.JWT_SECRET_KEY, {expiresIn: '7d'});
+
+        res.cookie('token', token, {
+            httpOnly: true, //prevent xss attack (cross site scripting)
+            secure: process.env.NODE_ENV === 'production', 
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'strict'//prevents CSRF attack (cross site request forgery)
+        });
+
+        res.status(200).json({success: true,user});
+    } catch (error) {
+        console.log('Error in Login: '+error);
+        res.status(500).json({message: 'Internal server error'});
+    }
 }
 
 export function Logout(req, res) {
-    res.send('Logout route working');
+    //res.send('Logout route working');
+    res.clearCookie('token');
+    res.status(200).json({message: 'Logout successful'});
 }
