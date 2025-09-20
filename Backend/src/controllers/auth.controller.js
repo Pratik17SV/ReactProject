@@ -1,64 +1,70 @@
 import User from '../model/User.js';
+import { createStreamUser } from '../lib/stream.js';
 import jwt from 'jsonwebtoken';
 
 export async function signup(req, res) {
-    const {name, email, password} = req.body;
+    const { name, email, password } = req.body;
     try {
-        if(!name || !email || !password) {
-            return res.status(400).json({message: 'All fields are required'});
+        if (!name || !email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
         }
 
-        if(password.length < 6) {
-            return res.status(400).json({message: 'Password must be at least 6 characters long'});
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters long' });
         }
-        //got it online to get the email format
+
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if(!emailRegex.test(email)) {
-            return res.status(400).json({message: 'Invalid email format'});
+        if (!emailRegex.test(email)) {
+            return res.status(400).json({ message: 'Invalid email format' });
         }
 
-        const existingUser = await User.findOne({email});
-        if(existingUser) {
-            return res.status(400).json({message: 'Email already exists use different email'});
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: 'Email already exists use different email' });
         }
 
-        const idx = Math.floor(Math.random() * 100)+1;//generate a random number between 1 and 100.
-        const randomAvater = 'https://avater.iran.liara.run/public/'+idx;
+        const idx = Math.floor(Math.random() * 100) + 1;
+        const randomAvater = 'https://avater.iran.liara.run/public/' + idx + '.png';
 
-        const newUser = new User({name, email, password, avatar:randomAvater});
+        const newUser = new User({ name, email, password, avatar: randomAvater });
+        await newUser.save();
 
         try {
-            await upsertStreamUser({
-            id:newUser._id.toString,
-            name:newUser.name,
-            email:newUser.email,
-            avatar:randomAvater||""
+            await createStreamUser({
+                id: newUser._id.toString(),
+                name: newUser.name,
+                email: newUser.email,
+                avatar: randomAvater || ""
             });
-            console.log('Stream is created for user: '+newUser.name);
+            console.log('Stream is created for user: ' + newUser.name);
         } catch (error) {
-            console.log('Error in createStreamUser: '+error);
+            console.log('Error in createStreamUser: ' + error);
         }
 
-
-
-        //To DO: Create a same user in stream chat
-        const token = jwt.sign({userId: newUser._id}, process.env.JWT_SECRET_KEY, {expiresIn: '7d'});
-
-        res.cookie('token', token, {
-            httpOnly: true, //prevent xss attack (cross site scripting)
-            secure: process.env.NODE_ENV === 'production', 
-            maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: 'strict'//prevents CSRF attack (cross site request forgery)
+        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, {
+            expiresIn: '7d'
         });
 
-        res.status(201).json({message: 'User created successfully', user: newUser});
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'strict'
+        });
+
+        res.status(201).json({
+            success: true,
+            message: 'User created successfully',
+            user: newUser
+        });
+
     } catch (error) {
-        console.log('Error in Signup: '+error);
-        res.status(500).json({message: 'Internal server error'});
+        console.log('Error in Signup: ' + error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-    res.send('Signup route working');
 }
+
+
 
 export async function login(req, res) {
     try {
@@ -75,7 +81,7 @@ export async function login(req, res) {
             return res.status(401).json({message: 'Invalid password'});
         }
 
-        const token = jwt.sign({userId: newUser._id}, process.env.JWT_SECRET_KEY, {expiresIn: '7d'});
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
 
         res.cookie('token', token, {
             httpOnly: true, //prevent xss attack (cross site scripting)
