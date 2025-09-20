@@ -1,7 +1,7 @@
 import User from '../model/User.js';
 import jwt from 'jsonwebtoken';
 
-export async function Signup(req, res) {
+export async function signup(req, res) {
     const {name, email, password} = req.body;
     try {
         if(!name || !email || !password) {
@@ -60,7 +60,7 @@ export async function Signup(req, res) {
     res.send('Signup route working');
 }
 
-export async function Login(req, res) {
+export async function login(req, res) {
     try {
         const {email, password} = req.body;
         if(!email || !password) {
@@ -91,7 +91,7 @@ export async function Login(req, res) {
     }
 }
 
-export function Logout(req, res) {
+export function logout(req, res) {
     //res.send('Logout route working');
     res.clearCookie('token');
     res.status(200).json({message: 'Logout successful'});
