@@ -22,6 +22,7 @@ const PORT = process.env.PORT;
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser()); // Add cookie parser middleware
 
 // Routes
 app.use("/app/auth", authRoute);
