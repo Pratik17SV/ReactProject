@@ -5,7 +5,7 @@ import './App.css'
 // Import all page components
 import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
-import RegisterPage from './pages/RegisterPage'
+import OnboardPage from './pages/OnboardPage'
 import ChatListPage from './pages/ChatListPage'
 import ChatWindowPage from './pages/ChatWindowPage'
 import CallLobbyPage from './pages/CallLobbyPage'
@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage user={user} setUser={setUser} />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/onboard" element={<OnboardPage />} />
           <Route path="/chat-list" element={<ChatListPage user={user} setUser={setUser} />} />
           <Route path="/chat/:roomId" element={<ChatWindowPage user={user} />} />
           <Route path="/call-lobby" element={<CallLobbyPage user={user} />} />

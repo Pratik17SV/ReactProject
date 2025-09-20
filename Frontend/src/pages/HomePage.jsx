@@ -26,7 +26,7 @@ function HomePage({ user, setUser }) {
         <div className="nav-container">
           <div className="nav-brand">
             <MessageCircle size={24} />
-            <span>ChatApp</span>
+            <span>Intrameet</span>
           </div>
           <div className="nav-actions">
             {user ? (
@@ -43,7 +43,7 @@ function HomePage({ user, setUser }) {
             ) : (
               <div className="auth-links">
                 <Link to="/login" className="nav-link">Sign In</Link>
-                <Link to="/register" className="nav-button">Get Started</Link>
+                <Link to="/onboard" className="nav-button">Get Started</Link>
               </div>
             )}
           </div>
@@ -63,7 +63,7 @@ function HomePage({ user, setUser }) {
               Video calls, instant messaging, screen sharing, and more - all in one place.
             </p>
             <div className="hero-actions">
-              <Link to="/register" className="cta-button primary">
+              <Link to="/onboard" className="cta-button primary">
                 <Play size={20} />
                 Get Started Free
               </Link>
@@ -95,7 +95,7 @@ function HomePage({ user, setUser }) {
                     <span></span>
                     <span></span>
                   </div>
-                  <div className="mockup-title">ChatApp</div>
+                  <div className="mockup-title">Intrameet</div>
                 </div>
                 <div className="mockup-content">
                   <div className="mockup-message received">
@@ -185,9 +185,9 @@ function HomePage({ user, setUser }) {
         <div className="cta-container">
           <div className="cta-content">
             <h2>Ready to get started?</h2>
-            <p>Join thousands of teams already using ChatApp to communicate better.</p>
+            <p>Join thousands of teams already using Intrameet to communicate better.</p>
             <div className="cta-actions">
-              <Link to="/register" className="cta-button primary large">
+              <Link to="/onboard" className="cta-button primary large">
                 <Play size={24} />
                 Start Free Trial
                 <ArrowRight size={20} />
@@ -204,7 +204,7 @@ function HomePage({ user, setUser }) {
             <div className="footer-brand">
               <div className="footer-logo">
                 <MessageCircle size={24} />
-                <span>ChatApp</span>
+                <span>Intrameet</span>
               </div>
               <p>Connecting teams worldwide</p>
             </div>
@@ -230,7 +230,7 @@ function HomePage({ user, setUser }) {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2025 ChatApp. All rights reserved.</p>
+            <p>&copy; 2025 Intrameet. All rights reserved.</p>
           </div>
         </div>
       </footer>

@@ -201,6 +201,7 @@
   max-height: 120px;
   min-height: 20px;
   font-family: inherit;
+  color: #666;
 }
 
 .message-input::placeholder {
@@ -296,7 +297,7 @@
 }
 
 .app.dark .message-input {
-  color: white;
+  color: #ccc;
 }
 
 .app.dark .message-input::placeholder {

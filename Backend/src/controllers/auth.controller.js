@@ -1,10 +1,15 @@
-import User from '../model/User.js';
-import { createStreamUser } from '../lib/stream.js';
-import jwt from 'jsonwebtoken';
+// src/controllers/auth.controller.js
 
+import User from '../model/User.js';
+import jwt from 'jsonwebtoken';
+import { createStreamUser, createStreamToken } from '../lib/stream.js';
+
+// ====================== SIGNUP ======================
 export async function signup(req, res) {
     const { name, email, password } = req.body;
+
     try {
+        // --- Validation ---
         if (!name || !email || !password) {
             return res.status(400).json({ message: 'All fields are required' });
         }
@@ -20,32 +25,30 @@ export async function signup(req, res) {
 
         const existingUser = await User.findOne({ email });
         if (existingUser) {
-            return res.status(400).json({ message: 'Email already exists use different email' });
+            return res.status(400).json({ message: 'Email already exists. Please login instead.' });
         }
 
+        // --- Create User in MongoDB ---
         const idx = Math.floor(Math.random() * 100) + 1;
-        const randomAvater = 'https://avater.iran.liara.run/public/' + idx + '.png';
+        const randomAvatar = `https://avatar.iran.liara.run/public/${idx}.png`;
 
-        const newUser = new User({ name, email, password, avatar: randomAvater });
+        const newUser = new User({ name, email, password, avatar: randomAvatar });
         await newUser.save();
 
-        try {
-            await createStreamUser({
-                id: newUser._id.toString(),
-                name: newUser.name,
-                email: newUser.email,
-                avatar: randomAvater || ""
-            });
-            console.log('Stream is created for user: ' + newUser.name);
-        } catch (error) {
-            console.log('Error in createStreamUser: ' + error);
-        }
-
-        const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, {
-            expiresIn: '7d'
+        // --- Create User in Stream ---
+        await createStreamUser({
+            id: newUser._id.toString(),
+            name: newUser.name,
+            email: newUser.email,
+            avatar: randomAvatar
         });
 
-        res.cookie('token', token, {
+        // --- Tokens ---
+        const jwtToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+        const streamToken = createStreamToken(newUser._id.toString());
+
+        // --- Set Cookie + Response ---
+        res.cookie('token', jwtToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             maxAge: 7 * 24 * 60 * 60 * 1000,
@@ -55,50 +58,63 @@ export async function signup(req, res) {
         res.status(201).json({
             success: true,
             message: 'User created successfully',
-            user: newUser
+            user: newUser,
+            jwt: jwtToken,
+            streamToken: streamToken
         });
 
     } catch (error) {
-        console.log('Error in Signup: ' + error);
+        console.error("❌ Signup Error:", error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
 
-
-
+// ====================== LOGIN ======================
 export async function login(req, res) {
+    const { email, password } = req.body;
+
     try {
-        const {email, password} = req.body;
-        if(!email || !password) {
-            return res.status(400).json({message: 'All fields are required'});
+        if (!email || !password) {
+            return res.status(400).json({ message: 'All fields are required' });
         }
-        const user = await User.findOne({email});
-        if(!user) {
-            return res.status(401).json({message: 'Invalid email or password'});
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(401).json({ message: 'Invalid email or password' });
         }
+
         const isMatch = await user.matchPassword(password);
-        if(!isMatch) {
-            return res.status(401).json({message: 'Invalid password'});
+        if (!isMatch) {
+            return res.status(401).json({ message: 'Invalid password' });
         }
 
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+        // --- Tokens ---
+        const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
+        const streamToken = createStreamToken(user._id.toString());
 
-        res.cookie('token', token, {
-            httpOnly: true, //prevent xss attack (cross site scripting)
-            secure: process.env.NODE_ENV === 'production', 
+        res.cookie('token', jwtToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
             maxAge: 7 * 24 * 60 * 60 * 1000,
-            sameSite: 'strict'//prevents CSRF attack (cross site request forgery)
+            sameSite: 'strict'
         });
 
-        res.status(200).json({success: true,user});
+        res.status(200).json({
+            success: true,
+            message: "Login successful",
+            user,
+            jwt: jwtToken,
+            streamToken: streamToken
+        });
+
     } catch (error) {
-        console.log('Error in Login: '+error);
-        res.status(500).json({message: 'Internal server error'});
+        console.error("❌ Login Error:", error.message);
+        res.status(500).json({ message: 'Internal server error' });
     }
 }
 
+// ====================== LOGOUT ======================
 export function logout(req, res) {
-    //res.send('Logout route working');
     res.clearCookie('token');
-    res.status(200).json({message: 'Logout successful'});
+    res.status(200).json({ message: 'Logout successful' });
 }

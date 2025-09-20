@@ -157,7 +157,7 @@ function ChatListPage({ user, setUser }) {
           <div className="welcome-icon">
             <MessageCircle size={64} />
           </div>
-          <h2>Welcome to ChatApp</h2>
+          <h2>Welcome to Intrameet</h2>
           <p>Select a conversation to start chatting, or create a new room to get started.</p>
           <div className="welcome-actions">
             <Link to="/call-lobby" className="action-button primary">

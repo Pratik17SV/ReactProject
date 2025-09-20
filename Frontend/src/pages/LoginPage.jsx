@@ -39,7 +39,7 @@ function LoginPage() {
         <div className="login-header">
           <div className="logo">
             <div className="logo-icon">💬</div>
-            <h1>ChatApp</h1>
+            <h1>Intrameet</h1>
           </div>
           <p className="login-subtitle">Welcome back! Please sign in to your account.</p>
         </div>
@@ -92,8 +92,8 @@ function LoginPage() {
         <div className="login-footer">
           <p>
             Don't have an account?{' '}
-            <Link to="/register" className="register-link">
-              Go to Register
+            <Link to="/onboard" className="register-link">
+              Create Account
             </Link>
           </p>
         </div>

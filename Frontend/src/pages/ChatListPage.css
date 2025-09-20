@@ -119,6 +119,7 @@
   font-size: 14px;
   background: #f8f9fa;
   transition: all 0.3s ease;
+  color: #666;
 }
 
 .search-input:focus {
@@ -126,6 +127,7 @@
   border-color: #667eea;
   background: white;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  color: #666;
 }
 
 .chats-section {
@@ -427,12 +429,13 @@
 .app.dark .search-input {
   background: #3a3a3a;
   border-color: #444;
-  color: white;
+  color: #ccc;
 }
 
 .app.dark .search-input:focus {
   background: #4a4a4a;
   border-color: #667eea;
+  color: #ccc;
 }
 
 .app.dark .section-header h4 {

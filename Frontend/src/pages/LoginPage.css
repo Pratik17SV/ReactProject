@@ -85,6 +85,7 @@
   font-size: 16px;
   transition: all 0.3s ease;
   background: #f8f9fa;
+  color: #666;
 }
 
 .input-container input:focus {
@@ -92,6 +93,7 @@
   border-color: #667eea;
   background: white;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  color: #666;
 }
 
 .password-toggle {
@@ -172,12 +174,13 @@
 .app.dark .input-container input {
   background: #2a2a2a;
   border-color: #444;
-  color: white;
+  color: #ccc;
 }
 
 .app.dark .input-container input:focus {
   background: #333;
   border-color: #667eea;
+  color: #ccc;
 }
 
 .app.dark .login-footer p {
