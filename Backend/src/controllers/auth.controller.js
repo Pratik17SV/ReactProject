@@ -36,12 +36,17 @@ export async function signup(req, res) {
         await newUser.save();
 
         // --- Create User in Stream ---
-        await createStreamUser({
-            id: newUser._id.toString(),
-            name: newUser.name,
-            email: newUser.email,
-            avatar: randomAvatar
-        });
+        try {
+            await createStreamUser({
+                id: newUser._id.toString(),
+                name: newUser.name,
+                email: newUser.email,
+                image: randomAvatar
+            });
+        } catch (streamError) {
+            console.error('Stream user creation failed:', streamError);
+            // Continue with registration even if Stream fails
+        }
 
         // --- Tokens ---
         const jwtToken = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
@@ -90,7 +95,14 @@ export async function login(req, res) {
 
         // --- Tokens ---
         const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_KEY, { expiresIn: '7d' });
-        const streamToken = createStreamToken(user._id.toString());
+        let streamToken = null;
+        
+        try {
+            streamToken = createStreamToken(user._id.toString());
+        } catch (streamError) {
+            console.error('Stream token creation failed:', streamError);
+            // Continue with login even if Stream token fails
+        }
 
         res.cookie('token', jwtToken, {
             httpOnly: true,
@@ -117,4 +129,57 @@ export async function login(req, res) {
 export function logout(req, res) {
     res.clearCookie('token');
     res.status(200).json({ message: 'Logout successful' });
+}
+
+export async function onboard(req, res) {
+    try {
+        const userId = req.user._id;
+        const { name, email, password, avatar, bio } = req.body;
+        
+        if (!name || !email || !password || !avatar || !bio) {
+            return res.status(400).json({
+                message: 'All fields are required',
+                missingFields: [
+                    !name && 'name',
+                    !email && 'email',
+                    !password && 'password',
+                    !avatar && 'avatar',
+                    !bio && 'bio'
+                ].filter(Boolean)
+            });
+        }
+        
+        const updatedUser = await User.findByIdAndUpdate(userId, {
+            ...req.body,
+            isOnboarded: true
+        }, { new: true });
+        
+        if (!updatedUser) {
+            return res.status(404).json({
+                message: 'User not found'
+            });
+        }
+        
+        // Update user in Stream
+        try {
+            await createStreamUser({
+                id: updatedUser._id.toString(),
+                name: updatedUser.name,
+                email: updatedUser.email,
+                image: updatedUser.avatar
+            });
+        } catch (streamError) {
+            console.error('Stream user update failed:', streamError);
+            // Continue with response even if Stream update fails
+        }
+        
+        res.status(200).json({
+            message: 'User updated successfully',
+            user: updatedUser
+        });
+        
+    } catch (error) {
+        console.error("onboard error:", error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
 }

@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     password: { type:String, required:true },
     avatar: { type:String, default:'' },
     bio: { type:String, default:'' },
-    isOnborded: { type:Boolean, default:false },
+    isOnboarded: { type:Boolean, default:false },
     isOnline: { type:Boolean, default:true },
     friends:[{ type:mongoose.Schema.Types.ObjectId, ref:'User' }],
     friendRequests:[{

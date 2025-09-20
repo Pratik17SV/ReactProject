@@ -5,6 +5,7 @@ import { StreamChat } from 'stream-chat';
 import authRoute from './Routes/auth.route.js';
 import friendRoute from './Routes/friend.route.js';
 import { connectDB } from './lib/db.js';
+import cookieParser from 'cookie-parser';
 import 'dotenv/config';
 
 const apiKey = process.env.STREAM_API_KEY;
