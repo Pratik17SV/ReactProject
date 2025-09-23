@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { StreamChat } from 'stream-chat';
 
 import authRoute from './Routes/auth.route.js';
+import userRoute from './Routes/user.route.js';
 import friendRoute from './Routes/friend.route.js';
 import { connectDB } from './lib/db.js';
 import cookieParser from 'cookie-parser';
@@ -26,6 +27,7 @@ app.use(cookieParser()); // Add cookie parser middleware
 
 // Routes
 app.use("/app/auth", authRoute);
+app.use("api/user", authRoute);
 app.use("/app/friends", friendRoute);
 
 // Stream setup
