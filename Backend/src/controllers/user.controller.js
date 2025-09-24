@@ -82,3 +82,36 @@ export async function sendFriendRequest(req, res) {
         res.status(500).json({ message: "Internet Server error" });
     }
 }
+
+export async function acceptFriendRequest(req, res) {
+    try {
+        const { id: requestId } = req.params;
+
+        const friendRequest = await FriendRequest.findById(requestId);
+
+        if (!friendRequest) {
+            return res.status(404).json({ message: "Friend request not found" });
+        }
+        // Check if the logged-in user is the recipient of the friend request
+        if (friendRequest.recipient.toString() !== req.user.id) {
+            return res.status(403).json({ message: "You are not authorized to accept this friend request" });
+        }
+        // Check if the friend request is already accepted
+        if (friendRequest.status === 'accepted') {
+            return res.status(400).json({ message: "This friend request has already been accepted" });
+        }
+        friendRequest.status = 'accepted';
+        await friendRequest.save();
+
+        // Add each user to the other's friends list
+        //$addtoset is used to avoid duplicate entries (add only if not already present)
+        await User.findByIdAndUpdate(friendRequest.recipient, { $addToSet: { friends: friendRequest.sender } });
+        await User.findByIdAndUpdate(friendRequest.sender, { $addToSet: { friends: req.user.id } });
+
+        res.status(200).json({ message: "Friend request accepted" });
+    } 
+    catch (error) {
+        console.error("Error in acceptFriendRequest.controller:", error.message);
+        res.status(500).json({ message: "Internet Server error" });
+    }
+}
