@@ -115,3 +115,39 @@ export async function acceptFriendRequest(req, res) {
         res.status(500).json({ message: "Internet Server error" });
     }
 }
+
+export async function getFriendRequests(req, res) {
+    try {
+        const incomingRequests = await FriendRequest.find({ recipient: req.user.id, status: 'pending' })
+        .populate('sender', 'name email avatar');
+
+        const acceptedRequests = await FriendRequest.find({ recipient: req.user.id, status: 'accepted' })
+        .populate('sender', 'name email avatar');
+
+        res.status(200).json({ incomingRequests, acceptedRequests });
+    } catch (error) {
+        console.error("Error in getFriendRequests.controller:", error.message);
+        res.status(500).json({ message: "Internet Server error" });   
+    }
+}
+
+export async function rejectFriendRequest(req, res) {
+    try {
+        const { id: requestId } = req.params;
+        const friendRequest = await FriendRequest.findById(requestId);        
+    } catch (error) {
+        console.error("Error in rejectFriendRequest.controller:", error.message);
+        res.status(500).json({ message: "Internet Server error" });
+    } 
+}
+
+export async function getOutgoingFriendRequests(req, res) {
+    try {
+        const outgoingRequests = await FriendRequest.find({ sender: req.user.id ,status: 'pending'})
+        .populate('recipient', 'name email avatar');
+        res.status(200).json({ outgoingRequests });
+    } catch (error) {
+        console.error("Error in getOutgoingFriendRequests.controller:", error.message);
+        res.status(500).json({ message: "Internet Server error" });
+    }
+}
