@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-
+import cors from 'cors';
 import authRoute from './Routes/auth.route.js';
 import userRoute from './Routes/user.route.js';
 import chatRoute from './Routes/chat.route.js';
@@ -20,6 +20,12 @@ dotenv.config();
 
 const PORT = process.env.PORT;
 
+app.use(cors(
+    {
+        origin: 'http://localhost:5173',
+        credentials: true,
+    }
+));
 // Middleware
 app.use(express.json());
 app.use(cookieParser()); // Add cookie parser middleware
