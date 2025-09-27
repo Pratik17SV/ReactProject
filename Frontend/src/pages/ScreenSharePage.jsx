@@ -12,7 +12,7 @@ import {
   Maximize2,
   Minimize2
 } from 'lucide-react'
-import './ScreenSharePage.css'
+import '../styleing/ScreenSharePage.css'
 
 function ScreenSharePage({ user }) {
   const { roomId } = useParams()

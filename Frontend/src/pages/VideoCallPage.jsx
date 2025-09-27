@@ -12,7 +12,7 @@ import {
   Settings,
   Maximize2
 } from 'lucide-react'
-import './VideoCallPage.css'
+import '../styleing/VideoCallPage.css'
 
 function VideoCallPage({ user }) {
   const { roomId } = useParams()

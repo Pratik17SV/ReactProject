@@ -15,7 +15,7 @@ import {
   Wifi,
   WifiOff
 } from 'lucide-react'
-import './ProfileSettingsPage.css'
+import '../styleing/ProfileSettingsPage.css'
 
 function ProfileSettingsPage({ user, setUser, isDarkMode, setIsDarkMode }) {
   const [formData, setFormData] = useState({

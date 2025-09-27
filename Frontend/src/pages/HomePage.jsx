@@ -11,7 +11,7 @@ import {
   LogOut,
   User
 } from 'lucide-react'
-import './HomePage.css'
+import '../styleing/HomePage.css'
 
 function HomePage({ user, setUser }) {
   const handleLogout = () => {

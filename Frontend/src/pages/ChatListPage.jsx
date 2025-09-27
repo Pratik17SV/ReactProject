@@ -10,7 +10,7 @@ import {
   Phone,
   Settings
 } from 'lucide-react'
-import './ChatListPage.css'
+import '../styleing/ChatListPage.css'
 
 function ChatListPage({ user, setUser }) {
   const [searchQuery, setSearchQuery] = useState('')

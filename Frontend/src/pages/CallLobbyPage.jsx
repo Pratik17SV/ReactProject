@@ -10,7 +10,7 @@ import {
   Users,
   Settings
 } from 'lucide-react'
-import './CallLobbyPage.css'
+import '../styleing/CallLobbyPage.css'
 
 function CallLobbyPage({ user }) {
   const navigate = useNavigate()

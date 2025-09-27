@@ -10,7 +10,7 @@ import {
   Users,
   Settings
 } from 'lucide-react'
-import './ChatWindowPage.css'
+import '../styleing/ChatWindowPage.css'
 
 function ChatWindowPage({ user }) {
   const { roomId } = useParams()

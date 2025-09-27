@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage user={user} setUser={setUser} />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/onboard" element={<OnboardPage />} />
+          <Route path="/signup" element={<OnboardPage />} />
           <Route path="/chat-list" element={<ChatListPage user={user} setUser={setUser} />} />
           <Route path="/chat/:roomId" element={<ChatWindowPage user={user} />} />
           <Route path="/call-lobby" element={<CallLobbyPage user={user} />} />

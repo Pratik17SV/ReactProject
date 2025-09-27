@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { User, Mail, Lock, Eye, EyeOff, Camera, Upload, X, Check } from 'lucide-react'
-import './OnboardPage.css'
+import '../styleing/OnboardPage.css'
 
 function OnboardPage() {
   const [formData, setFormData] = useState({
