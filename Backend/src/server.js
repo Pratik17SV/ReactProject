@@ -1,10 +1,8 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import { StreamChat } from 'stream-chat';
 
 import authRoute from './Routes/auth.route.js';
 import userRoute from './Routes/user.route.js';
-import friendRoute from './Routes/friend.route.js';
 import { connectDB } from './lib/db.js';
 import cookieParser from 'cookie-parser';
 import 'dotenv/config';
@@ -27,16 +25,16 @@ app.use(cookieParser()); // Add cookie parser middleware
 
 // Routes
 app.use("/app/auth", authRoute);
-app.use("api/user", authRoute);
-app.use("/app/friends", friendRoute);
+app.use("api/user", userRoute);
+
 
 // Stream setup
 export const createStreamUser = async (userData) => {
     try {
         await serverClient.upsertUsers([userData]);
-        console.log("✅ Stream user created:", userData.id);
+        console.log("Stream user created:", userData.id);
     } catch (error) {
-        console.error("❌ Error in createStreamUser:", error.message);
+        console.error("Error in createStreamUser:", error.message);
     }
 };
 
@@ -50,5 +48,4 @@ app.listen(PORT, async () => {
   console.log(`Signup endpoint: POST http://localhost:${PORT}/app/auth/signup`);
   console.log('Database is conecting...');
   await connectDB();
-  
 });
