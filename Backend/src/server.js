@@ -31,7 +31,7 @@ app.use(express.json());
 app.use(cookieParser()); // Add cookie parser middleware
 
 // Routes
-app.use("/app/auth", authRoute);
+app.use("/api/auth", authRoute);
 app.use("api/user", userRoute);
 app.use("api/chat",chatRoute);
 

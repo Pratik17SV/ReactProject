@@ -6,7 +6,7 @@ export const useSignUp = () => {
 
   const { mutate: signupMutation, isPending, error } = useMutation({
     mutationFn: async (data) => {
-      const response = await axiosInstance.post("/auth/signup", data);
+      const response = await axiosInstance.post("auth/signup", data);
       return response.data;
     },
     onSuccess: () => {
