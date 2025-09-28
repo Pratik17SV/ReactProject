@@ -1,20 +1,21 @@
-import { Outlet } from 'react-router-dom';
+import  Sidebar  from './Sidebar.jsx';
+import Navbar from './Navbar.jsx';
 
 const Layout = ({ showSidebar = false, children }) => {
   return (
-    <div className="flex h-screen">
-      {showSidebar && (
-        <div className="w-64 bg-base-200 border-r border-base-300">
-          {/* Sidebar content */}
-          <div className="p-4">
-            <h2 className="text-lg font-semibold">Navigation</h2>
-            {/* Add sidebar navigation items here */}
+    <div className='min-h-screen'>
+      <div className='flex'>
+        {showSidebar&& <Sidebar/>}
+          
+          <div className='flex-1 flex flex-col'>
+            <Navbar/>
+            <main className='flex-1 overflow-y-auto'>
+              {children}
+            </main>
           </div>
-        </div>
-      )}
-      <div className="flex-1 overflow-hidden">
-        {children || <Outlet />}
+        
       </div>
+
     </div>
   );
 };

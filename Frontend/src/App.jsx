@@ -24,18 +24,17 @@ const App = () => {
   const isOnboarded = authUser?.isOnboarded;
 
   if (isLoading) return <PageLoader />;
-  console.log({ isLoading });
-  // Note: 'error' is not defined in useAuthUser; fix if needed
-  // console.log({ error });
 
   return (
-    <div className="h-screen" data-theme="light">
+    <div className="h-screen" data-theme="winter">
       <Routes>
         <Route
           path="/"
           element={
             isAuthenticated && isOnboarded ? (
-              <HomePage />
+              <Layout showSidebar={true}>
+                <HomePage />
+              </Layout>
             ) : (
               <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
             )
