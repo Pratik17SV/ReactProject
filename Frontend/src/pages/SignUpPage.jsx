@@ -2,19 +2,26 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import signupIllustration from '../assets/signup.png';
 import navIcon from '../assets/nav_icon.png'; 
-import { useSignUp } from '../hooks/useSignUp'; 
+import { useSignUp } from '../hooks/useSignUp'; // ✅ Make sure your custom hook is imported
 
 const SignUpPage = () => {
   const [signupData, setSignupData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
   });
- const { isPending, error, signupMutation } = useSignUp();
+
+  const { isPending, error, signupMutation } = useSignUp(); // ✅ Custom hook version
 
   const handleSignup = (e) => {
     e.preventDefault();
-    signupMutation(signupData);
+
+    // ✅ Adjust payload structure if backend expects `name`
+    signupMutation({
+      name: signupData.fullName,       // <-- change this to match backend
+      email: signupData.email,
+      password: signupData.password,
+    });
   };
 
   return (
