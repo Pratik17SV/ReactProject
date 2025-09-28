@@ -134,15 +134,14 @@ export function logout(req, res) {
 export async function onboard(req, res) {
     try {
         const userId = req.user._id;
-        const { name, email, password, avatar, bio } = req.body;
+        const { name, email, avatar, bio } = req.body;
         
-        if (!name || !email || !password || !avatar || !bio) {
+        if (!name || !email || !avatar || !bio) {
             return res.status(400).json({
                 message: 'All fields are required',
                 missingFields: [
                     !name && 'name',
                     !email && 'email',
-                    !password && 'password',
                     !avatar && 'avatar',
                     !bio && 'bio'
                 ].filter(Boolean)
@@ -150,7 +149,10 @@ export async function onboard(req, res) {
         }
         
         const updatedUser = await User.findByIdAndUpdate(userId, {
-            ...req.body,
+            name,
+            email,
+            avatar,
+            bio,
             isOnboarded: true
         }, { new: true });
         
@@ -174,6 +176,7 @@ export async function onboard(req, res) {
         }
         
         res.status(200).json({
+            success: true,
             message: 'User updated successfully',
             user: updatedUser
         });
