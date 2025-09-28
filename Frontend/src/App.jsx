@@ -23,6 +23,7 @@ function App() {
   });//check the authentication status
 
   const authUser = authdata?.user;
+  if(isLoading) return <div>Loading...</div>
   console.log({isLoading});
   console.log({error});
   return (
