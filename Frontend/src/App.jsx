@@ -1,18 +1,17 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 
-import Home from './pages/HomePage.jsx';
+import HomePage from './pages/HomePage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import CallPage from './pages/CallPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
-import Notification from './pages/NotificationPage.jsx';
-import Onboarding from './pages/OnbordingPage.jsx';
+import NotificationPage from './pages/NotificationPage.jsx'; // Use singular
+import OnboardingPage from './pages/OnboardingPage.jsx'; // Fix typo
 
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from './lib/axios.js';
-import Layout from './components/Layout.jsx';
 
 function App() {
   const { data:authdata, error, isLoading } = useQuery({
@@ -28,11 +27,9 @@ function App() {
   console.log({isLoading});
   console.log({error});
   return (
-    <div className='h-screen' data-theme="light">
-      
+    <div className="h-screen" data-theme="light">
       <Routes>
-        <Route path="/" element={authUser ? 
-        <Layout><Home /></Layout> : <Navigate to="/login"/>} />
+        <Route path="/" element={authUser ? <Home /> : <Navigate to="/login"/>} />
         <Route path="/signup" element={!authUser ? <SignUpPage />: <Navigate to='/'/>} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to='/'/>} />
         <Route path="/call" element={authUser ? <CallPage />: <Navigate to='/login'/>} />
@@ -44,6 +41,6 @@ function App() {
       <Toaster />
     </div>
   );
-}
+};
 
 export default App;
