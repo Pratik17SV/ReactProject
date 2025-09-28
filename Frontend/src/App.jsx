@@ -12,6 +12,7 @@ import Onboarding from './pages/OnbordingPage.jsx';
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import { axiosInstance } from './lib/axios.js';
+import Layout from './components/Layout.jsx';
 
 function App() {
   const { data:authdata, error, isLoading } = useQuery({
@@ -30,7 +31,8 @@ function App() {
     <div className='h-screen' data-theme="light">
       
       <Routes>
-        <Route path="/" element={authUser ? <Home /> : <Navigate to="/login"/>} />
+        <Route path="/" element={authUser ? 
+        <Layout><Home /></Layout> : <Navigate to="/login"/>} />
         <Route path="/signup" element={!authUser ? <SignUpPage />: <Navigate to='/'/>} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to='/'/>} />
         <Route path="/call" element={authUser ? <CallPage />: <Navigate to='/login'/>} />
