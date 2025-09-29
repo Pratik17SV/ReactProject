@@ -13,8 +13,9 @@ import {
   ChannelHeader,
   Thread,
 } from "stream-chat-react";
-import ChatLoader from "../components/ChatLoader";
-import { toast } from "react-hot-toast";
+  import ChatLoader from "../components/ChatLoader";
+  import { toast } from "react-hot-toast";
+  import CallButton from "../components/CallButton";
 
 const STREAM_API_KEY = import.meta.env.VITE_STREAM_API_KEY;
 const ChatPage = () => {
@@ -43,17 +44,13 @@ const ChatPage = () => {
       try {
         setConnecting(true);
         const client = StreamChat.getInstance(STREAM_API_KEY);
-        await client.connectUser(
-          {
-            id: authUser._id,
-            name: authUser.name,
-            image: authUser.avatar,
-          },
-          token
-        );
+        await client.connectUser({
+          id: authUser._id,
+          name: authUser.name,
+          image: authUser.avatar,
+        }, token);
 
         const channelId = [authUser._id, targetUser].sort().join("-");
-
         const currChannel = client.channel("messaging", channelId, {
           members: [authUser._id, targetUser],
         });
@@ -63,7 +60,6 @@ const ChatPage = () => {
         setChannel(currChannel);
       } catch (error) {
         console.error("Error initializing Stream chat client", error);
-        toast.error("Could not connect to chat. Please try again.");
       } finally {
         setConnecting(false);
       }
@@ -128,11 +124,24 @@ const ChatPage = () => {
     );
   }
 
+  const handleVideoCall = () => {
+    try {
+      const callUrl = `${window.location.origin}/call/${channel.id}`;
+      channel.sendMessage({
+        text: `I've started a video call. Join me here: ${callUrl}`,
+      });
+      toast.success("Video call link sent");
+    } catch (e) {
+      toast.error("Failed to send call link");
+    }
+  };
+
   return (
     <div className="h-[93vh]">
       <Chat client={chatClient}>
         <Channel channel={channel}>
           <div className="w-full relative">
+            <CallButton handleVideoCall={handleVideoCall} disabled={connecting} />
             <Window>
               <ChannelHeader />
               <MessageList />
