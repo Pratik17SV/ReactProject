@@ -7,7 +7,7 @@ import logo from '../assets/nav_icon.png';
 import { Bell, BellIcon, LogOutIcon } from 'lucide-react';
 import ThemeSelector from './ThemeSelector.jsx';
 
-const Navbar = () => {
+const Navbar = ({ hasSidebar = false }) => {
   const {authUser} = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname.startsWith('/chat/');
@@ -28,7 +28,10 @@ const Navbar = () => {
 
           {/* Logo Section */}
           {!isChatPage && (
-            <Link to='/' className='flex items-center gap-2.5'>
+            <Link
+              to='/'
+              className={`flex items-center gap-2.5 ${hasSidebar ? 'lg:hidden' : ''}`}
+            >
               <img src={logo} alt="IntraMeet Logo" className="h-6" />
               <span className='text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
                 IntraMeet
