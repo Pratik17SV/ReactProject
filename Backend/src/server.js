@@ -32,8 +32,8 @@ app.use(cookieParser()); // Add cookie parser middleware
 
 // Routes
 app.use("/api/auth", authRoute);
-app.use("api/user", userRoute);
-app.use("api/chat",chatRoute);
+app.use("/api/users", userRoute);
+app.use("/api/chat", chatRoute);
 
 
 // Stream setup

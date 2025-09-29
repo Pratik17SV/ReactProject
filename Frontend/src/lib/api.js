@@ -38,7 +38,7 @@ export async function getRecommendedUsers() {
 }
 
 export async function getOutgoingFriendReqs() {
-  const res = await axiosInstance.get("/users/outgoingFriendReqs");
+  const res = await axiosInstance.get("/users/outgoing-friend-requests");
   // Return the outgoingRequests array directly
   return res.data?.outgoingRequests ?? [];
 }

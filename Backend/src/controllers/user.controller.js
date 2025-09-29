@@ -13,7 +13,7 @@ export async function getRecommendedUsers(req, res) {
             { _id: { $nin: currentUser.friends } },
             { isOnboarded: true }
            ] 
-        })
+        });
         res.status(200).json({ users: recommendedUser });
     } catch (error) {
        console.error("Error in getRecommendedUsers:", error.message); 
@@ -24,12 +24,10 @@ export async function getRecommendedUsers(req, res) {
 export async function getFriends(req, res) {
     try {
         const user = await User.findById(req.user.id)
-        .select('friends')
-        .populate('friends', 'name email');
-        
+            .select('friends')
+            .populate('friends', 'name email avatar');
         res.status(200).json({ friends: user.friends });
-    }
-    catch (error) {
+    } catch (error) {
         console.error("Error in getFriends:", error.message);
         res.status(500).json({ message: "Internet Server error" });
     }
@@ -74,7 +72,6 @@ export async function sendFriendRequest(req, res) {
             sender: myid,
             recipient: recipientId,
         });
-
         await friendRequest.save();
         res.status(201).json(friendRequest);
     } catch (error) {
@@ -92,7 +89,7 @@ export async function acceptFriendRequest(req, res) {
         if (!friendRequest) {
             return res.status(404).json({ message: "Friend request not found" });
         }
-        // Check if the logged-in user is the recipient of the friend request
+
         if (friendRequest.recipient.toString() !== req.user.id) {
             return res.status(403).json({ message: "You are not authorized to accept this friend request" });
         }
