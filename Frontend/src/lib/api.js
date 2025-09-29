@@ -1,4 +1,3 @@
-import { useRouteLoaderData } from "react-router-dom";
 import { axiosInstance } from "../lib/axios";
 
 
@@ -16,7 +15,6 @@ export const completeOnboarding = async (formData) => {
    const response = await axiosInstance.post("/auth/onboarding", formData)
    return response.data;
 };
-
 export const logout = async () => {
       const res = await axiosInstance.post("/auth/logout");
       return res.data;
@@ -25,7 +23,8 @@ export const logout = async () => {
 export async function getUserFriends() {
     try {
         const res = await axiosInstance.get("/users/friends");
-        return res.data;
+        // Return the friends array directly
+        return res.data?.friends ?? [];
     } catch (error) {
         console.error("Error fetching user friends in api:", error);
         return null;
@@ -34,12 +33,14 @@ export async function getUserFriends() {
 
 export async function getRecommendedUsers() {
   const res = await axiosInstance.get("/users");
-  return res.data;
+  // Return the users array directly
+  return res.data?.users ?? [];
 }
 
 export async function getOutgoingFriendReqs() {
   const res = await axiosInstance.get("/users/outgoingFriendReqs");
-  return res.data;   
+  // Return the outgoingRequests array directly
+  return res.data?.outgoingRequests ?? [];
 }
 
 export async function sendFriendRequest(userId) {
