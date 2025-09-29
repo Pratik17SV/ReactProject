@@ -36,8 +36,8 @@ const SignUpPage = () => {
                 type="text"
                 className="grow"
                 placeholder="Full Name"
-                name="fullName"
-                value={signupData.fullName}
+                name="name"
+                value={signupData.name}
                 onChange={(e) =>
                   setSignupData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
                 }
