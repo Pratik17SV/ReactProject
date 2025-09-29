@@ -7,7 +7,14 @@ const FriendCard = ({ friend }) => {
         {/* USER INFO */}
         <div className="flex items-center gap-3 mb-3">
           <div className="avatar size-12">
-            <img src={friend.avatar} alt={friend.name} />
+            <img
+              src={friend.avatar}
+              alt={friend.name || "User"}
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                e.currentTarget.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(friend?.name || "User");
+              }}
+            />
           </div>
           <div className="flex flex-col">
             <h3 className="font-semibold truncate">{friend.name}</h3>
