@@ -1,65 +1,189 @@
-# ReactProject
-# IntraMeet 🎥💬
+# IntraMeet — Video Call & Chat App
 
-> **Chat, video calls, and screen sharing inside your private network or server.**  
-> Built with **MERN + WebRTC + Socket.io**  
-> A collaborative project by **Pratik & Sahil** 👨‍💻👨‍💻
+Unified README for the repository covering Frontend and Backend components.
 
----
+## Project Overview
+IntraMeet is a lightweight video call and chat application with:
+- Real-time chat
+- 1:1 / group video calling (WebRTC)
+- Friend discovery / friend requests
+- Basic authentication and profile management
+- Notifications and presence (via WebSocket / Socket.IO)
 
-## 🚀 Features
-- 🔐 **User Authentication** (JWT-based login & registration)  
-- 💬 **Real-time Chat** (one-to-one & group)  
-- 📹 **Video Calls** (WebRTC peer-to-peer)  
-- 🖥️ **Screen Sharing** (share your screen in meetings)  
-- 🌐 **LAN Mode** — Works on **local Wi-Fi without internet**  
-- ☁️ **Private Cloud Mode** — Deploy to your own cloud server  
+This repo contains two main folders:
+- `Frontend/` — React (Vite) application
+- `Backend/` — API server (Node/Express or similar) and real-time signaling
 
----
-
-## 🏗️ Tech Stack
-- **Frontend:** React (with Tailwind / Material UI)  
-- **Backend:** Node.js + Express.js  
-- **Database:** MongoDB (Mongoose ORM)  
-- **Real-time Communication:** Socket.io + WebRTC  
-- **Authentication:** JWT + Bcrypt  
+> If your backend folder uses a different name (e.g. `Server/`), update the commands below accordingly.
 
 ---
 
-## 📂 Project Structure
+## Quick Start (Windows)
+
+1. Clone the repo
+```powershell
+git clone <repo-url>
+cd "b:\Collage BCA\corsera\ReactProject"
+```
+
+2. Install dependencies
+
+Frontend:
+```powershell
+cd Frontend
+npm install
+```
+
+Backend:
+```powershell
+cd ..\Backend
+npm install
+```
+
+3. Environment
+- Create .env files in both `Frontend/` and `Backend/` (see `Environment` section).
+- Start both services (run in separate terminals) or use a process manager:
+
+Frontend:
+```powershell
+cd Frontend
+npm run dev
+# opens at http://localhost:5173 (or Vite assigned port)
+```
+
+Backend:
+```powershell
+cd Backend
+npm run dev
+# default API port: 4000 (or as configured)
+```
+
+Optional: run both concurrently (requires `concurrently` or a custom script).
 
 ---
 
-## ⚙️ API Endpoints
+## Frontend
 
-### 🔑 Auth
-- `POST /api/auth/register` → Register user  
-- `POST /api/auth/login` → Login & get JWT  
+Location: `Frontend/`
 
-### 👤 Users
-- `GET /api/users/me` → Get user profile  
-- `PATCH /api/users/me` → Update profile  
+Tech:
+- React (Vite)
+- React Router
+- @tanstack/react-query
+- Tailwind / DaisyUI (utility classes seen in components)
+- lucide-react icons
 
-### 💬 Chat
-- `POST /api/messages` → Send message  
-- `GET /api/messages/:roomId` → Fetch messages  
+Environment variables (example `.env` / Vite):
+- VITE_API_URL=http://localhost:4000/api
+- VITE_SOCKET_URL=http://localhost:4000
 
-### 📞 Rooms
-- `POST /api/rooms` → Create chat/call room  
-- `GET /api/rooms/:id` → Get room details  
+Common scripts:
+- `npm run dev` — start dev server
+- `npm run build` — build production
+- `npm run preview` — preview production build
+- `npm run lint` — linting
+
+Notes:
+- Update `VITE_API_URL` to point to your backend API.
+- Assets live under `Frontend/src/assets/` (e.g. `signup.png`, `nav_icon.png`).
+
+---
+
+## Backend
+
+Location: `Backend/` (replace if different)
+
+Suggested tech:
+- Node.js + Express (or Fastify)
+- MongoDB (Mongoose)
+- JWT for auth
+- Socket.IO for real-time (signaling, chat, presence)
+- WebRTC for peer-to-peer media (signaling via Socket.IO)
+
+Environment variables (example `.env`):
+- PORT=4000
+- MONGODB_URI=mongodb://localhost:27017/intrameet
+- JWT_SECRET=your_jwt_secret
+- CORS_ORIGIN=http://localhost:5173
+- SOCKET_PATH=/socket.io
+
+Common endpoints (implementations may vary):
+- POST /api/auth/register
+- POST /api/auth/login
+- GET /api/auth/me
+- GET /api/friends         -> user's friends
+- GET /api/users/recommended
+- GET /api/friends/outgoing
+- POST /api/friends/request -> send friend request (body: { recipientId })
+- GET /api/notifications
+- POST /api/calls/create or signaling routes for rooms
+
+Real-time events (Socket.IO examples):
+- connection, disconnect
+- join-room, leave-room
+- signal, offer, answer, ice-candidate
+- chat:message
+- friend:request, friend:accept
+
+Database:
+- Users collection (name, email, passwordHash, avatar, status)
+- Friends / FriendRequests collection
+- Messages (optional: per-room)
+- Calls / Rooms (optional)
+
+Start backend:
+```powershell
+cd Backend
+npm run dev
+```
 
 ---
 
-## 🖼️ Wireframes
-- **Login/Register** → Email, password, register  
-- **Chat List** → List of rooms with recent message  
-- **Chat Window** → Messages, call & share buttons  
-- **Video Call** → Video grid, mute, camera toggle, screen share  
-- **Screen Share** → Shared screen + participants view  
+## Development Tips
 
-*(See `/docs/IntraMeet_Blueprint.pdf` for full wireframes & ER diagram)*
+- Ensure frontend `VITE_API_URL` matches backend base path.
+- Use browser devtools and server logs when debugging socket and WebRTC flows.
+- For WebRTC testing across devices, use HTTPS (or localhost with proper flags).
+- If friends list is empty, confirm backend `/friends` returns array or wrap response safely in frontend (see `HomePage.jsx`).
 
 ---
+
+## Testing & Linting
+
+- Run unit / integration tests if provided:
+```powershell
+npm test
+```
+- Lint:
+```powershell
+npm run lint
+```
+
+---
+
+## Production Deployment
+
+- Build frontend (`npm run build`) and serve via static host or behind Nginx.
+- Run backend behind reverse proxy, ensure HTTPS and proper CORS and socket configuration.
+- Use environment-specific variables for DB and secrets.
+
+---
+
+## Contributing
+
+- Fork → branch → PR
+- Keep changes small and focused
+- Run linting and tests before opening PR
+
+---
+
+## Troubleshooting
+
+- "No friends shown": verify backend returns friends array and frontend uses correct API URL. See `Frontend/src/pages/HomePage.jsx` — it normalizes API shapes.
+- `useSignUp is not a function`: ensure hook export/import matches (default vs named).
+
+---
+
 
 ## 🖥️ Setup Instructions
 
