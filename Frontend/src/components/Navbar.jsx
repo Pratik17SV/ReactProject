@@ -4,20 +4,20 @@ import { useLocation, Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logout } from '../lib/api.js';
 import logo from '../assets/nav_icon.png';
-import { Bell, BellIcon, LogOutIcon } from 'lucide-react';
+import { BellIcon, LogOutIcon } from 'lucide-react';
 import ThemeSelector from './ThemeSelector.jsx';
 
 const Navbar = ({ hasSidebar = false }) => {
-  const {authUser} = useAuthUser();
+  const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname.startsWith('/chat/');
 
   const queryClient = useQueryClient();
 
-  const {mutate: logourMutaion} = useMutation({
+  const { mutate: logourMutaion } = useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ['authUser']});
+      queryClient.invalidateQueries({ queryKey: ['authUser'] });
     }
   });
 
@@ -39,32 +39,35 @@ const Navbar = ({ hasSidebar = false }) => {
             </Link>
           )}
 
-          {/* Right Side (User / Buttons etc if needed later) */}
-          <div className='flex items-center gap-3 sm:gap-4'>
-            <Link to={"/notifications"} className='btn btn-ghost btn-circle '>
-              <button className='btn btn-ghost btn-circle'>
-                <BellIcon className='h-8 w-6 text-base-content opacity-80' />
-              </button>
+          {/* Right Side Icons – All grouped with 13px gap */}
+          <div className="flex items-center ml-auto gap-[13px]">
+
+            {/* Notifications */}
+            <Link to="/notifications" className="btn btn-ghost btn-circle">
+              <BellIcon className="h-8 w-6 text-base-content opacity-80" />
             </Link>
-          </div>
 
-          <ThemeSelector/>
+            {/* Theme Toggle */}
+            <ThemeSelector />
 
-          <div className='avater' >
-            <div className='w-9 rounded-full'>
-              <img src={authUser?.avatar} alt="User Avatar" />
+            {/* User Avatar */}
+            <div className="avatar">
+              <div className="w-9 rounded-full">
+                <img src={authUser?.avatar} alt="User Avatar" />
+              </div>
             </div>
-          </div>
-          
-          <button className='btn btn-gost btn-circle' onClick={logourMutaion}>
-            <LogOutIcon className='h-6 w-6 text-base-content opacity-80' />
-          </button>
 
-          
+            {/* Logout */}
+            <button className="btn btn-ghost btn-circle" onClick={logourMutaion}>
+              <LogOutIcon className="h-6 w-6 text-base-content opacity-80" />
+            </button>
+
+          </div>
+
         </div>
       </div>
     </nav>
   )
 }
 
-export default Navbar
+export default Navbar;
