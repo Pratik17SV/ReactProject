@@ -1,5 +1,6 @@
 import  Sidebar  from './Sidebar.jsx';
 import Navbar from './Navbar.jsx';
+import FriendRequestPopup from './FriendRequestPopup.jsx';
 
 const Layout = ({ showSidebar = false, children }) => {
   return (
@@ -12,6 +13,7 @@ const Layout = ({ showSidebar = false, children }) => {
             <main className='flex-1 overflow-y-auto'>
               {children}
             </main>
+            <FriendRequestPopup />
           </div>
         
       </div>

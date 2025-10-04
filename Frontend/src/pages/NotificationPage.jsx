@@ -19,7 +19,26 @@ const NotificationPage = () => {
   });
   const { mutate: rejectReq, isPending: isRejecting } = useMutation({
     mutationFn: rejectFriendRequest,
-    onSuccess: () => {
+    onMutate: async (requestId) => {
+      await queryClient.cancelQueries({ queryKey: ["friendRequests"] });
+      const previous = queryClient.getQueryData(["friendRequests"]);
+      // Optimistically remove the rejected request from cache
+      queryClient.setQueryData(["friendRequests"], (old) => {
+        if (!old) return old;
+        return {
+          ...old,
+          incomingReqs: (old.incomingReqs || []).filter((r) => r._id !== requestId),
+        };
+      });
+      return { previous };
+    },
+    onError: (_err, _vars, context) => {
+      if (context?.previous) {
+        queryClient.setQueryData(["friendRequests"], context.previous);
+      }
+    },
+    onSettled: () => {
+      // Try to revalidate; backend may not yet update but it's harmless
       queryClient.invalidateQueries({ queryKey: ["friendRequests"] });
     },
   });

@@ -56,13 +56,13 @@ const Sidebar = () => {
 
       </nav>
 
-      {/* User card */}
+      {/* User card (click to edit profile) */}
       <div className="p-4 border-t border-base-300 mt-auto">
-        <div className="flex items-center gap-3">
+        <Link to="/profile" className="flex items-center gap-3 group">
           {authUser?.avatar ? (
-            <img src={authUser.avatar} alt={authUser?.name || 'User'} className="h-10 w-10 rounded-full object-cover" />
+            <img src={authUser.avatar} alt={authUser?.name || 'User'} className="h-10 w-10 rounded-full object-cover ring-1 ring-base-300 group-hover:ring-primary transition" />
           ) : (
-            <div className="h-10 w-10 rounded-full bg-base-300 flex items-center justify-center text-sm font-semibold">
+            <div className="h-10 w-10 rounded-full bg-base-300 flex items-center justify-center text-sm font-semibold ring-1 ring-base-300 group-hover:ring-primary transition">
               {(authUser?.name || 'U').slice(0,1).toUpperCase()}
             </div>
           )}
@@ -70,7 +70,7 @@ const Sidebar = () => {
             <p className="font-semibold text-sm">{authUser?.name || 'Guest'}</p>
             <p className="text-xs text-base-content/60 truncate">{authUser?.email || 'Not signed in'}</p>
           </div>
-        </div>
+        </Link>
       </div>
     </aside>
   )

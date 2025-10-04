@@ -50,12 +50,12 @@ const Navbar = ({ hasSidebar = false }) => {
             {/* Theme Toggle */}
             <ThemeSelector />
 
-            {/* User Avatar */}
-            <div className="avatar">
-              <div className="w-9 rounded-full">
+            {/* User Avatar (click to edit profile) */}
+            <Link to="/profile" title="Edit profile" className="avatar">
+              <div className="w-9 rounded-full ring-1 ring-base-300 hover:ring-primary transition">
                 <img src={authUser?.avatar} alt="User Avatar" />
               </div>
-            </div>
+            </Link>
 
             {/* Logout */}
             <button className="btn btn-ghost btn-circle" onClick={logourMutaion}>

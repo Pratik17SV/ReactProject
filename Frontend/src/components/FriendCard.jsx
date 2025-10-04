@@ -16,9 +16,14 @@ const FriendCard = ({ friend }) => {
               }}
             />
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col min-w-0">
             <h3 className="font-semibold truncate">{friend.name}</h3>
             <p className="text-xs text-base-content/70 truncate">{friend.email}</p>
+            {friend.bio && (
+              <p className="text-xs text-base-content/60 truncate" title={friend.bio}>
+                {friend.bio}
+              </p>
+            )}
           </div>
         </div>
 
