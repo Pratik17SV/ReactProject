@@ -3,6 +3,19 @@
 @tailwind utilities;
 
 
+/* Ensure consistent background across the app */
+html, body, #root {
+  height: 100%;
+}
+body {
+  /* Use the theme background consistently */
+  @apply bg-base-100;
+}
+#root {
+  @apply bg-base-100;
+}
+
+
 .str-chat__channel {
     display: flex;
     align-items: center;
