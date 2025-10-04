@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom';
 import useAuthUser from '../hooks/useAuthUser.js';
-import logo from '../assets/nav_icon.png';
-
-import { HomeIcon, UsersIcon, BellIcon } from "lucide-react";
+import { HomeIcon, MessageSquare, BellIcon } from "lucide-react";
+import navIcon from '../assets/nav_icon.png';
 
 const Sidebar = () => {
   const { authUser } = useAuthUser();
@@ -15,7 +14,7 @@ const Sidebar = () => {
       {/* Header / Brand */}
       <div className="p-5 border-b border-base-300">
         <Link to='/' className='flex items-center gap-2.5'>
-          <img src={logo} alt="IntraMeet Logo" className="h-6" />
+          <img src={navIcon} alt="IntraMeet" className="h-8 w-8" />
           <span className='text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
             IntraMeet
           </span>
@@ -36,13 +35,13 @@ const Sidebar = () => {
         </Link>
 
         <Link
-          to="/friends"
+          to="/messages"
           className={`btn btn-ghost justify-start w-full gap-3 px-3 normal-case ${
-            currentPath === "/friends" ? "btn-active" : ""
+            currentPath === "/messages" ? "btn-active" : ""
           }`}
         >
-          <UsersIcon className="size-5 text-base-content opacity-70" />
-          <span>Friends</span>
+          <MessageSquare className="size-5 text-base-content opacity-70" />
+          <span>Messages</span>
         </Link>
 
         <Link

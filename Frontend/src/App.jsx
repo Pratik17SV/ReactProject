@@ -8,6 +8,7 @@ import CallPage from './pages/CallPage.jsx';
 import ChatPage from './pages/ChatPage.jsx';
 import NotificationPage from './pages/NotificationPage.jsx'; // Use singular
 import OnboardingPage from './pages/OnboardingPage.jsx'; // Fix typo
+import MessagePage from './pages/MessagePage.jsx';
 
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
@@ -119,6 +120,18 @@ const App = () => {
               )
             ) : (
               <Navigate to="/login" />
+            )
+          }
+        />
+        <Route
+          path="/messages"
+          element={
+            isAuthenticated && isOnboarded ? (
+              <Layout showSidebar={true}>
+                <MessagePage />
+              </Layout>
+            ) : (
+              <Navigate to={!isAuthenticated ? "/login" : "/onboarding"} />
             )
           }
         />

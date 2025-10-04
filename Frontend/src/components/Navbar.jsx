@@ -3,9 +3,9 @@ import useAuthUser from '../hooks/useAuthUser.js';
 import { useLocation, Link } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logout } from '../lib/api.js';
-import logo from '../assets/nav_icon.png';
 import { BellIcon, LogOutIcon } from 'lucide-react';
 import ThemeSelector from './ThemeSelector.jsx';
+import navIcon from '../assets/nav_icon.png';
 
 const Navbar = ({ hasSidebar = false }) => {
   const { authUser } = useAuthUser();
@@ -32,7 +32,7 @@ const Navbar = ({ hasSidebar = false }) => {
               to='/'
               className={`flex items-center gap-2.5 ${hasSidebar ? 'lg:hidden' : ''}`}
             >
-              <img src={logo} alt="IntraMeet Logo" className="h-6" />
+              <img src={navIcon} alt="IntraMeet" className="h-8 w-8" />
               <span className='text-2xl font-bold font-mono bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary tracking-wider'>
                 IntraMeet
               </span>
