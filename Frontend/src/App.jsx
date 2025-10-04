@@ -10,6 +10,7 @@ import NotificationPage from './pages/NotificationPage.jsx'; // Use singular
 import OnboardingPage from './pages/OnboardingPage.jsx'; // Fix typo
 import ProfilePage from './pages/ProfilePage.jsx';
 import MessagePage from './pages/MessagePage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
 
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
@@ -148,6 +149,7 @@ const App = () => {
             )
           }
         />
+        <Route path="/terms" element={<TermsPage />} />
       </Routes>
 
       <Toaster />
