@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {
   MessageCircle,
   Video,
-  Users,
+  Palette,
   Shield,
   Zap,
   Globe,
@@ -150,9 +150,9 @@ const LandingPage = () => {
               <p className="text-base-content/70">Powerful features designed for modern teams</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <Feature icon={Video} title="HD Video Calls" desc="Crystal clear video calls with up to 50 participants. Share your screen, collaborate in real-time." />
-              <Feature icon={MessageCircle} title="Instant Messaging" desc="Send messages, files, and emojis instantly. Organize conversations in channels and DMs." />
-              <Feature icon={Users} title="Team Collaboration" desc="Create teams, manage permissions, and keep everyone in the loop with smart notifications." />
+              <Feature icon={Video} title="HD Video Calls" desc="Crystal clear video calls. Share your screen, collaborate in real-time." />
+              <Feature icon={MessageCircle} title="Instant Messaging" desc="Send messages, files, and emojis instantly. Organize conversations in DMs." />
+              <Feature icon={Palette} title="Personalized Themes" desc="Make IntraMeet your own. Choose from a variety of light and dark themes to create your perfect workspace." />
               <Feature icon={Shield} title="Secure & Private" desc="End-to-end protections and enterprise-grade security for peace of mind." />
               <Feature icon={Zap} title="Lightning Fast" desc="Optimized for speed and reliability. Low-latency connections for smooth communication." />
               <Feature icon={Globe} title="Cross Platform" desc="Works seamlessly across desktop, mobile, and web. Stay connected wherever you are." />
