@@ -11,6 +11,7 @@ import OnboardingPage from './pages/OnboardingPage.jsx'; // Fix typo
 import ProfilePage from './pages/ProfilePage.jsx';
 import MessagePage from './pages/MessagePage.jsx';
 import TermsPage from './pages/TermsPage.jsx';
+import LandingPage from './pages/LandingPage.jsx';
 
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
@@ -40,7 +41,8 @@ const App = () => {
                 <HomePage />
               </Layout>
             ) : (
-              <Navigate to={!isAuthenticated ? '/login' : '/onboarding'} />
+              // Show marketing landing page for unauthenticated users
+              !isAuthenticated ? <LandingPage /> : <Navigate to="/onboarding" />
             )
           }
         />
