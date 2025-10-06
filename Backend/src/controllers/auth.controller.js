@@ -1,5 +1,3 @@
-// src/controllers/auth.controller.js
-
 import User from '../model/User.js';
 import jwt from 'jsonwebtoken';
 import { createStreamUser, createStreamToken } from '../lib/stream.js';
@@ -69,7 +67,7 @@ export async function signup(req, res) {
         });
 
     } catch (error) {
-        console.error("❌ Signup Error:", error.message);
+        console.error("Signup Error:", error.message);
         res.status(500).json({ message: 'Internal server error' });
     }
 }
@@ -105,7 +103,7 @@ export async function login(req, res) {
         }
 
         res.cookie('token', jwtToken, {
-            httpOnly: true,
+            httpOnly: true, //rotects against XSS (Cross-Site Scripting) attacks.
             secure: process.env.NODE_ENV === 'production',
             maxAge: 7 * 24 * 60 * 60 * 1000,
             sameSite: 'strict'
