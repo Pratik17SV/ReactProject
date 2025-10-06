@@ -86,8 +86,8 @@ const LandingPage = () => {
                   Connect, Chat, and Collaborate
                   <span className="block bg-clip-text text-transparent bg-gradient-to-r from-amber-200 to-sky-800"> Seamlessly</span>
                 </h1>
-                <p className="mt-4 text-base-content/70 text-lg max-w-xl">
-                  Experience the future of team communication with our all-in-one platform. Video calls, instant messaging, screen sharing, and more — all in one place.
+                <p className="mt-4 text-base-content/80 text-lg max-w-xl">
+                Effortless Chat, Video Calls, and Screen Sharing. 
                 </p>
                 <div className="mt-6 flex flex-wrap gap-3">
                   <Link to="/onboarding" className="btn btn-lg rounded-full btn-primary font-semibold shadow hover:-translate-y-0.5 transition">
@@ -147,7 +147,7 @@ const LandingPage = () => {
           <div className="container mx-auto px-4 my-auto">
             <div className="text-center mb-10">
               <h2 className="text-3xl font-bold">Everything you need to stay connected</h2>
-              <p className="text-base-content/70">Powerful features designed for modern teams</p>
+              <p className="text-base-content/70">Powerful features designed for modern Users</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               <Feature icon={Video} title="HD Video Calls" desc="Crystal clear video calls. Share your screen, collaborate in real-time." />
