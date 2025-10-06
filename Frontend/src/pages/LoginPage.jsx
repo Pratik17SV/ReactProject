@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import useLogin from "../hooks/userLogin";
 import { Video } from "lucide-react"; // Use an icon for the logo
-
+import navIcon from '../assets/nav_icon.png';
 // Import assets to match the signup page
 import signupIllustration from '../assets/signup.png';
 
@@ -35,9 +35,7 @@ const LoginPage = () => {
         <div className="card-body lg:w-1/2">
           {/* LOGO - updated to use a styled icon component */}
           <div className="flex items-center gap-3 mb-4">
-            <div className='flex items-center justify-center bg-primary rounded-lg p-2'>
-              <Video className='size-7 text-primary-content' />
-            </div>
+            <img src={navIcon} alt="IntraMeet Logo" className="h-10 w-10" />
             <h1 className="text-3xl font-bold">IntraMeet</h1>
           </div>
 
