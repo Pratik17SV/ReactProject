@@ -11,15 +11,15 @@ import { UsersIcon } from "lucide-react";
 import FriendCard from "../components/FriendCard.jsx";
 import NoFriends from "../components/NoFriends.jsx";
 
-const HomePage = () => {
+  const HomePage = () => {
   const queryClient = useQueryClient();
   const [outgoingRequestsIds, setOutgoingRequestsIds] = useState(new Set());
+  const [userSearch, setUserSearch] = useState("");
 
   const { data: friends = [], isLoading: loadingFriends } = useQuery({
     queryKey: ["friends"],
     queryFn: getUserFriends,
   });
-
   const { data: recommendedUsers = [], isLoading: loadingUsers } = useQuery({
     queryKey: ["users"],
     queryFn: getRecommendedUsers,
@@ -85,6 +85,15 @@ const HomePage = () => {
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Meet New Users</h2>
               <p className="opacity-70">Discover new users and connect with them</p>
             </div>
+            <div className="mt-4 mb-5 flex">
+              <input
+                type="text"
+                value={userSearch}
+                onChange={(e) => setUserSearch(e.target.value)}
+                placeholder="Search users by name or email"
+                className="input input-bordered w-full"
+              />
+            </div>
 
             {loadingUsers ? (
               <div className="flex justify-center py-12">
@@ -97,7 +106,15 @@ const HomePage = () => {
               </div>
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {recommendedUsers.map((user) => {
+                {recommendedUsers
+                  .filter((u) => {
+                    const t = userSearch.trim().toLowerCase();
+                    if (!t) return true;
+                    const name = (u.name || "").toLowerCase();
+                    const email = (u.email || "").toLowerCase();
+                    return name.includes(t) || email.includes(t);
+                  })
+                  .map((user) => {
                   const hasRequestBeenSent = outgoingRequestsIds.has(user._id);
 
                   return (
@@ -115,6 +132,11 @@ const HomePage = () => {
                             <p className="text-sm opacity-70">{user.email}</p>
                           </div>
                         </div>
+                        {user.bio && (
+                          <p className="text-sm text-base-content opacity-80">
+                            {user.bio}
+                          </p>
+                        )}
 
                         <button
                           className="btn btn-primary btn-sm w-full"
