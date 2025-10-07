@@ -26,7 +26,6 @@ const Navbar = ({ hasSidebar = false }) => {
       <div className='container mx-auto px4 sm:px-6 lg:px-8'>
         <div className='flex justify-between items-center w-full'>
 
-          {/* Logo Section */}
           {!isChatPage && (
             <Link
               to='/'
@@ -39,25 +38,24 @@ const Navbar = ({ hasSidebar = false }) => {
             </Link>
           )}
 
-          {/* Right Side Icons – All grouped with 13px gap */}
+          
           <div className="flex items-center ml-auto gap-[13px]">
 
-            {/* Notifications */}
+            
             <Link to="/notifications" className="btn btn-ghost btn-circle">
               <BellIcon className="h-8 w-6 text-base-content opacity-80" />
             </Link>
 
-            {/* Theme Toggle */}
+            
             <ThemeSelector />
 
-            {/* User Avatar (click to edit profile) */}
+            
             <Link to="/profile" title="Edit profile" className="avatar">
               <div className="w-9 rounded-full ring-1 ring-base-300 hover:ring-primary transition">
                 <img src={authUser?.avatar} alt="User Avatar" />
               </div>
             </Link>
 
-            {/* Logout */}
             <button className="btn btn-ghost btn-circle" onClick={logourMutaion}>
               <LogOutIcon className="h-6 w-6 text-base-content opacity-80" />
             </button>

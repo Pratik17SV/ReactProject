@@ -15,9 +15,7 @@ const Layout = ({ showSidebar = false, children }) => {
             </main>
             <FriendRequestPopup />
           </div>
-        
       </div>
-
     </div>
   );
 };

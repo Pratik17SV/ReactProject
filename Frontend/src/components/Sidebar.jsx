@@ -11,7 +11,7 @@ const Sidebar = () => {
 
   return (
     <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
-      {/* Header / Brand */}
+
       <div className="p-5 border-b border-base-300">
         <Link to='/' className='flex items-center gap-2.5'>
           <img src={navIcon} alt="IntraMeet" className="h-8 w-8" />
@@ -56,19 +56,18 @@ const Sidebar = () => {
 
       </nav>
 
-      {/* User card (click to edit profile) */}
       <div className="p-4 border-t border-base-300 mt-auto">
         <Link to="/profile" className="flex items-center gap-3 group">
           {authUser?.avatar ? (
             <img src={authUser.avatar} alt={authUser?.name || 'User'} className="h-10 w-10 rounded-full object-cover ring-1 ring-base-300 group-hover:ring-primary transition" />
           ) : (
             <div className="h-10 w-10 rounded-full bg-base-300 flex items-center justify-center text-sm font-semibold ring-1 ring-base-300 group-hover:ring-primary transition">
-              {(authUser?.name || 'U').slice(0,1).toUpperCase()}
+              {(authUser?.name )}
             </div>
           )}
           <div className="flex-1">
-            <p className="font-semibold text-sm">{authUser?.name || 'Guest'}</p>
-            <p className="text-xs text-base-content/60 truncate">{authUser?.email || 'Not signed in'}</p>
+            <p className="font-semibold text-sm">{authUser?.name }</p>
+            <p className="text-xs text-base-content/60 truncate">{authUser?.email }</p>
           </div>
         </Link>
       </div>

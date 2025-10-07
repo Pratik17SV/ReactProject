@@ -3,8 +3,8 @@ import { axiosInstance } from "./axios";
 
 export const getAuthUser = async () => {
     try {
-            const res = await axiosInstance.get("/auth/me");
-            return res.data;
+      const res = await axiosInstance.get("/auth/me");
+        return res.data;
     } catch (error) {
       console.error("Error fetching getauthuser in api:", error);
       return null;
@@ -24,12 +24,12 @@ export const logout = async () => {
 
 export async function getUserFriends() {
     try {
-        const res = await axiosInstance.get("/users/friends");
+      const res = await axiosInstance.get("/users/friends");
         // Return the friends array directly
-        return res.data?.friends ?? [];
+      return res.data?.friends ?? [];
     } catch (error) {
-        console.error("Error fetching user friends in api:", error);
-        return null;
+      console.error("Error fetching user friends in api:", error);
+      return null;
     }
 }
 
