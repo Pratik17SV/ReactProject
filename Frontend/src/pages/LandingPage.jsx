@@ -75,9 +75,8 @@ const LandingPage = () => {
           </div>
         </div>
       </header>
-      {/* Normal page scrolling */}
       <main>
-        {/* Hero Section */}
+        {/* Main Section */}
         <section className="min-h-[calc(100vh-4rem)]">
           <div className="container mx-auto h-full px-4">
             <div className="h-full grid md:grid-cols-2 gap-10 items-center">
@@ -101,7 +100,7 @@ const LandingPage = () => {
                 
               </div>
               <div className="flex items-center justify-center p-6 md:p-8 animate-[fadeInRight_0.8s_ease-out_0.2s_both]">
-                {/* Phone mockup */}
+                {/* Phone display */}
                 <div className="w-[300px] h-[600px] bg-neutral-900 rounded-[30px] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.3)] relative mx-auto my-6 md:my-8">
                   <div className="w-full h-full bg-base-100 rounded-2xl overflow-hidden flex flex-col">
                     <div className="bg-base-200 px-5 py-4 border-b border-base-300 flex items-center justify-between">
@@ -159,8 +158,6 @@ const LandingPage = () => {
             </div>
           </div>
         </section>
-
-        {/* CTA Section */}
         
       </main>
 

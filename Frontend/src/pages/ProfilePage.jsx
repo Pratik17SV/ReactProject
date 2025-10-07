@@ -65,7 +65,6 @@ const ProfilePage = () => {
         <div className="card bg-base-200 shadow">
           <div className="card-body">
             <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Avatar */}
               <div className="flex flex-col items-center gap-3">
                 <div className="size-24 rounded-full bg-base-300 overflow-hidden">
                   {formState.profilePic ? (
@@ -81,7 +80,6 @@ const ProfilePage = () => {
                 </button>
               </div>
 
-              {/* Full Name */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text flex items-center gap-2"><User2Icon className="size-4"/> Full Name</span>
@@ -95,7 +93,6 @@ const ProfilePage = () => {
                 />
               </div>
 
-              {/* Email */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text flex items-center gap-2"><MailIcon className="size-4"/> Email</span>
@@ -112,7 +109,6 @@ const ProfilePage = () => {
                 </div>
               </div>
 
-              {/* Bio */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text flex items-center gap-2"><QuoteIcon className="size-4"/> Bio</span>

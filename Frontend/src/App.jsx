@@ -41,7 +41,6 @@ const App = () => {
                 <HomePage />
               </Layout>
             ) : (
-              // Show marketing landing page for unauthenticated users
               !isAuthenticated ? <LandingPage /> : <Navigate to="/onboarding" />
             )
           }

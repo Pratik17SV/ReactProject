@@ -22,7 +22,7 @@ const NotificationPage = () => {
     onMutate: async (requestId) => {
       await queryClient.cancelQueries({ queryKey: ["friendRequests"] });
       const previous = queryClient.getQueryData(["friendRequests"]);
-      // Optimistically remove the rejected request from cache
+      // remove the rejected request from cache
       queryClient.setQueryData(["friendRequests"], (old) => {
         if (!old) return old;
         return {
